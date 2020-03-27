@@ -1,1 +1,5 @@
 rootProject.name = 'cqrsexample'
+
+include 'application'
+include "productsquery"
+include 'productscommand'
