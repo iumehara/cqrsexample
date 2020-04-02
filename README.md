@@ -67,3 +67,9 @@ Query Microservice (localhost:8081)
 cd server/productsquery
 ./gradlew bootrun
 ```
+
+## Note
+This is proof of concept, and not production ready. 
+Remaining issues to address include:
+- No exception handling, so dropped messages result in out-of-syn view database
+- No event store, so reproducing view database from zero is difficult 
