@@ -1,7 +1,9 @@
-package com.example.productsquery.repo;
+package com.example.productsquery.dataprojector.repo;
 
 import com.example.productsquery.dto.ProductInventoryQueryDto;
 import com.example.productsquery.dto.ProductQueryDto;
+import com.example.productsquery.repo.ProductsQueryRepo;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
@@ -9,11 +11,12 @@ import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
+@Qualifier("PGProductsQueryRepo")
 @Repository
-public class DBProductsQueryRepo implements ProductsQueryRepo {
+public class PGProductsQueryRepo implements ProductsQueryRepo {
     private JdbcTemplate jdbcTemplate;
 
-    public DBProductsQueryRepo(JdbcTemplate jdbcTemplate) {
+    public PGProductsQueryRepo(JdbcTemplate jdbcTemplate) {
         this.jdbcTemplate = jdbcTemplate;
     }
 

@@ -2,7 +2,7 @@ package com.example.productsquery;
 
 import com.example.productsquery.dto.ProductInventoryQueryDto;
 import com.example.productsquery.dto.ProductQueryDto;
-import com.example.productsquery.repo.ProductsQueryRepo;
+import com.example.productsquery.service.ProductsQueryService;
 import org.junit.jupiter.api.Test;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.ResultActions;
@@ -19,9 +19,9 @@ import static org.springframework.test.web.servlet.setup.MockMvcBuilders.standal
 public class ProductsQueryControllerTests {
     @Test
     void findProductById() throws Exception {
-        ProductsQueryRepo repoStub = new ProductsQueryRepo() {
+        ProductsQueryService service = new ProductsQueryService() {
             @Override
-            public ProductQueryDto findById(int productId) {
+            public ProductQueryDto findProductById(int id) {
                 return new ProductQueryDto(1,
                         "Paper Weight",
                         "Keeps paper on desk",
@@ -35,8 +35,7 @@ public class ProductsQueryControllerTests {
                 return null;
             }
         };
-        ProductsQueryHandler handler = new ProductsQueryHandler(repoStub);
-        MockMvc controller = standaloneSetup(new ProductsQueryController(handler)).build();
+        MockMvc controller = standaloneSetup(new ProductsQueryController(service)).build();
 
 
         ResultActions resultActions = controller.perform(get("/query/products/1"));
@@ -54,9 +53,9 @@ public class ProductsQueryControllerTests {
 
     @Test
     void findOutOfStockProducts() throws Exception {
-        ProductsQueryRepo repoStub = new ProductsQueryRepo() {
+        ProductsQueryService service = new ProductsQueryService() {
             @Override
-            public ProductQueryDto findById(int productId) {
+            public ProductQueryDto findProductById(int id) {
                 return null;
             }
 
@@ -66,8 +65,7 @@ public class ProductsQueryControllerTests {
                         new ProductInventoryQueryDto(354, "Stapler (red)", 0));
             }
         };
-        ProductsQueryHandler handler = new ProductsQueryHandler(repoStub);
-        MockMvc controller = standaloneSetup(new ProductsQueryController(handler)).build();
+        MockMvc controller = standaloneSetup(new ProductsQueryController(service)).build();
 
 
         ResultActions resultActions = controller.perform(get("/query/products/out-of-stock"));

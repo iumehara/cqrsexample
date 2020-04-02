@@ -1,19 +1,19 @@
-package com.example.productsquery;
+package com.example.productsquery.handler;
 
 import com.example.productsquery.dto.ProductInventoryQueryDto;
 import com.example.productsquery.dto.ProductQueryDto;
+import com.example.messagebroker.message.query.FindOutOfStockProducts;
+import com.example.messagebroker.message.query.FindProductById;
 import com.example.productsquery.repo.ProductsQueryRepo;
-import com.example.productsquery.query.FindOutOfStockProducts;
-import com.example.productsquery.query.FindProductById;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
-public class ProductsQueryHandler {
+public class DefaultProductsQueryHandler implements ProductsQueryHandler {
     private ProductsQueryRepo repo;
 
-    public ProductsQueryHandler(ProductsQueryRepo repo) {
+    public DefaultProductsQueryHandler(ProductsQueryRepo repo) {
         this.repo = repo;
     }
 

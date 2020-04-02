@@ -1,7 +1,8 @@
-package com.example.productsquery.repo;
+package com.example.productsquery.dataprojector.repo;
 
 import com.example.productsquery.dto.ProductInventoryQueryDto;
 import com.example.productsquery.dto.ProductQueryDto;
+import com.example.productsquery.repo.DataSourceTestHelper;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -11,7 +12,7 @@ import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class DBProductsQueryRepoTests {
+public class PGProductsQueryRepoTests {
     private JdbcTemplate jdbcTemplate;
 
     @BeforeEach
@@ -24,7 +25,7 @@ public class DBProductsQueryRepoTests {
 
     @Test
     void findById() {
-        DBProductsQueryRepo repo = new DBProductsQueryRepo(jdbcTemplate);
+        PGProductsQueryRepo repo = new PGProductsQueryRepo(jdbcTemplate);
         ProductQueryDto product = repo.findById(111);
 
         assertThat(product).isEqualTo(new ProductQueryDto(111,
@@ -37,7 +38,7 @@ public class DBProductsQueryRepoTests {
 
     @Test
     void findOutOfStockProducts() {
-        DBProductsQueryRepo repo = new DBProductsQueryRepo(jdbcTemplate);
+        PGProductsQueryRepo repo = new PGProductsQueryRepo(jdbcTemplate);
         List<ProductInventoryQueryDto> outOfStockProducts = repo.findOutOfStockProducts();
 
         assertThat(outOfStockProducts.size()).isEqualTo(1);
